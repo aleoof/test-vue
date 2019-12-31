@@ -1,22 +1,25 @@
 <template>
-<div class="margin">
-  <Home></Home>
+  <div>
+    <Navbar></Navbar>
+    <div class="margin">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Home from './components/home/Home'
+import Navbar from "./components/navbar/Navbar";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    Home
+    Navbar
   }
-}
+};
 </script>
 
 <style>
-.margin{ 
+.margin {
   padding: 2em 2em;
 }
 </style>
