@@ -7,6 +7,12 @@
                 <p class="level-item">Idade - {{idade}}</p>
             </div>
             <div class="level-right">
+                <p class="level-item" v-if="this.activate">
+                    <a class="button" v-on:click="toggleActivate">Desativar</a>
+                </p>
+                <p class="level-item" v-else>
+                    <a class="button" v-on:click="toggleActivate">Ativar</a>
+                </p>
                 <p class="level-item">
                     <a class="button" v-on:click="removeUser">Remover</a>
                 </p>
@@ -19,10 +25,15 @@
 <script>
 export default {
     name: 'Items',
-    props:['name','idade','index'],
+    props:['name','idade','index','activate'],
     methods: {
         removeUser(){
             this.$emit('removeUser', this.$props.index)
+        },
+        toggleActivate(){
+            let activate = this.$props.activate
+            activate = !activate
+            this.$emit('toggleActivate', activate)
         }
     }
 }

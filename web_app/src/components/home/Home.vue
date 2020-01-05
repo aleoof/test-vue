@@ -35,20 +35,24 @@
       <div class="column is-2">
         <a class="button" v-on:click="addNewUser">Adicionar</a>
       </div>
+      <div class="column is-12" v-for="(item,index) in items"
+        :key="index">
       <Items
-        v-for="(item,index) in items"
-        :key="index"
+        v-if="item.activated"
         v-bind:index="index"
+        v-bind:activate="item.activated"
         v-bind:name="item.name"
         v-bind:idade="item.idade"
         v-on:removeUser="removeUsers"
       ></Items>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Items from "../item-list/Items";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -61,6 +65,10 @@ export default {
       newIdade: null,
       items: []
     };
+  },
+  mounted() {
+    axios.get("http://localhost:3333/").then(response => (
+      this.items = response.data));
   },
   methods: {
     addNewUser: function() {
